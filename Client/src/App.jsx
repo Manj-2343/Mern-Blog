@@ -6,19 +6,21 @@ import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/DashBoard";
 import Projects from "./pages/Projects";
 import Headers from "./components/Headers";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <BrowserRouter>
-    <Headers/>
+      <Headers />
       <Routes>
-        <Route path="" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/projects" element={<Projects />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };
