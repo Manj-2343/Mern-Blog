@@ -20,9 +20,10 @@ import {
   signOutSuccess,
 } from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const DashProfile = () => {
-  const { currentUser, error } = useSelector((state) => state.user);
+  const { currentUser, error, loading } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
@@ -48,7 +49,6 @@ const DashProfile = () => {
     }
   }, [imageFile]);
 
- 
   const uploadImage = async () => {
     //services firebase for upload the image
     // service firebase.storage {
@@ -228,9 +228,24 @@ const DashProfile = () => {
           placeholder="***********"
           onChange={handleChange}
         />
-        <Button type="submit" gradientDuoTone="purpleToBlue">
-          Update
+        <Button
+          type="submit"
+          gradientDuoTone="purpleToBlue"
+          disabled={loading || imageFileUploading}
+        >
+          {loading ? "Loading..." : "Updated"}
         </Button>
+        {currentUser.isAdmin && (
+          <Link to={"/create-post"}>
+            <Button
+              type="button"
+              gradientDuoTone="purpleToPink"
+              className="w-full"
+            >
+              Create A Post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>

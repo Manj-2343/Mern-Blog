@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema(
       default:
         "https://images.pexels.com/photos/1368382/pexels-photo-1368382.jpeg",
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
