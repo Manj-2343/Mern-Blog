@@ -22,7 +22,13 @@ const __dirname = path.resolve();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://deploy-mern-1whq.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 app.listen(8000, () => {
@@ -34,11 +40,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-
 app.use(express.static(path.join(__dirname, "/client/dist")));
-app.get("*",(req,res)=>{
-  res.sendFile(path.join(__dirname, "client","dist","index.html"));
-})
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 //add middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
