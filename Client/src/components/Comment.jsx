@@ -4,7 +4,7 @@ import moment from "moment";
 import { FaThumbsUp } from "react-icons/fa";
 import { Button, Textarea } from "flowbite-react";
 
-const Comment = ({ comment, onLike, onEdit,onDelete }) => {
+const Comment = ({ comment, onLike, onEdit, onDelete }) => {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment.content);
@@ -13,7 +13,9 @@ const Comment = ({ comment, onLike, onEdit,onDelete }) => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const res = await fetch(`/api/user/${comment.userId}`);
+        const res = await fetch(
+          `https://api.webdevxyz.com/api/user/${comment.userId}`
+        );
         const data = await res.json();
         if (res.ok) {
           setUser(data);
@@ -30,15 +32,18 @@ const Comment = ({ comment, onLike, onEdit,onDelete }) => {
   };
   const handleSave = async () => {
     try {
-      const res = await fetch(`/api/comment/editComment/${comment._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          content: editedContent,
-        }),
-      });
+      const res = await fetch(
+        `https://api.webdevxyz.com/api/comment/editComment/${comment._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: editedContent,
+          }),
+        }
+      );
       if (res.ok) {
         setIsEditing(false);
         onEdit(comment, editedContent);

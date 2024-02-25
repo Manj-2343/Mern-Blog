@@ -24,7 +24,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin:"*",
+    origin: "*",
     methods: ["POST", "GET"],
     credentials: true,
   })
@@ -35,10 +35,10 @@ app.listen(8000, () => {
   console.log("Server is running on port 8000!!!");
 });
 
-app.use("/api/user", userRoutes);
-app.use("/api/auth", authRoutes);
-app.use("/api/post", postRoutes);
-app.use("/api/comment", commentRoutes);
+app.use("https://api.webdevxyz.com/api/user", userRoutes);
+app.use("https://api.webdevxyz.com/api/auth", authRoutes);
+app.use("https://api.webdevxyz.com/api/post", postRoutes);
+app.use("https://api.webdevxyz.com/api/comment", commentRoutes);
 
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {

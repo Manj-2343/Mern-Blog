@@ -110,13 +110,16 @@ const DashProfile = () => {
     }
     try {
       dispatch(updateStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://api.webdevxyz.com/api/user/update/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         dispatch(updateFailure(data.message));
@@ -133,9 +136,12 @@ const DashProfile = () => {
     setShowModal(false);
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
-      });
+      const res = await fetch(
+        `https://api.webdevxyz.com/api/user/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const data = await res.json();
       if (!res.ok) {
         dispatch(deleteUserFailure(data.message));
@@ -148,7 +154,7 @@ const DashProfile = () => {
   };
   const handleSignOut = async () => {
     try {
-      const res = await fetch("/api/user/signOut", {
+      const res = await fetch("https://api.webdevxyz.com/api/user/signOut", {
         method: "POST",
       });
       const data = await res.json();

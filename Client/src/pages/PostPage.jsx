@@ -16,7 +16,9 @@ const PostPage = () => {
     const fetchPost = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/post/getposts?slug=${postSlug}`);
+        const res = await fetch(
+          `https://api.webdevxyz.com/api/post/getposts?slug=${postSlug}`
+        );
         const data = await res.json();
         if (!res.ok) {
           setError(true);
@@ -39,7 +41,9 @@ const PostPage = () => {
   useEffect(() => {
     try {
       const fetchRecentPosts = async () => {
-        const res = await fetch(`/api/post/getposts?limit=2`);
+        const res = await fetch(
+          `https://api.webdevxyz.com/api/post/getposts?limit=2`
+        );
         const data = await res.json();
         if (res.ok) {
           setRecentPosts(data.posts);
@@ -91,9 +95,7 @@ const PostPage = () => {
       </div>
       <CommentSection postId={post._id} />
       <div className="flex flex-col justify-center items-center mb-5">
-        <h1 className="text-xl mt-5  ">
-          Recent Article
-        </h1>
+        <h1 className="text-xl mt-5  ">Recent Article</h1>
         <div className="flex flex-wrap gap-5 mt-5 justify-center">
           {recentPosts &&
             recentPosts.map((post) => <PostCard key={post._id} post={post} />)}

@@ -21,7 +21,7 @@ const CommentSection = ({ postId }) => {
       return;
     }
     try {
-      const res = await fetch(`/api/comment/create`, {
+      const res = await fetch(`https://api.webdevxyz.com/api/comment/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,9 @@ const CommentSection = ({ postId }) => {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const res = await fetch(`/api/comment/getPostComments/${postId}`);
+        const res = await fetch(
+          `https://api.webdevxyz.com/api/comment/getPostComments/${postId}`
+        );
         if (res.ok) {
           const data = await res.json();
           setComments(data);
@@ -62,9 +64,12 @@ const CommentSection = ({ postId }) => {
         navigate("/sign-in");
         return;
       }
-      const res = await fetch(`/api/comment/likeComment/${commentId}`, {
-        method: "PUT",
-      });
+      const res = await fetch(
+        `https://api.webdevxyz.com/api/comment/likeComment/${commentId}`,
+        {
+          method: "PUT",
+        }
+      );
       if (res.ok) {
         const data = await res.json();
         setComments(
@@ -90,17 +95,20 @@ const CommentSection = ({ postId }) => {
       )
     );
   };
-  const handleDelete = async(commentId) => {
+  const handleDelete = async (commentId) => {
     try {
       setShowModal(false);
       try {
         if (!currentUser) {
-          navigate('/sign-in');
+          navigate("/sign-in");
           return;
         }
-        const res = await fetch(`/api/comment/deleteComment/${commentId}`, {
-          method: 'DELETE',
-        });
+        const res = await fetch(
+          `https://api.webdevxyz.com/api/comment/deleteComment/${commentId}`,
+          {
+            method: "DELETE",
+          }
+        );
         if (res.ok) {
           const data = await res.json();
           setComments(comments.filter((comment) => comment._id !== commentId));
