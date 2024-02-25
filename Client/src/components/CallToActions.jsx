@@ -12,17 +12,18 @@ const CallToActions = () => {
           gradientDuoTone="purpleToPink"
           className="rounded-tl-xl rounded-bl-none"
         >
-          <a
+          <a 
             href="https://github.com/Manj-2343"
             target="_blank"
             rel="noopener noreferrer"
+            className="rounded-lg"
           >
             MERN Projects
           </a>
         </Button>
       </div>
       <div className="p-7 flex-1">
-        <img src="https://bairesdev.mo.cloudinary.net/blog/2023/08/What-Is-JavaScript-Used-For.jpg" />
+        <img src="https://threejs-journey.com/assets/lessons/27/000.png" />
       </div>
     </div>
   );
